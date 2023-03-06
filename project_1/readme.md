@@ -26,37 +26,3 @@ Displays the username, password, and host where the account was created.  This w
 After coming up with your list, you realize that you're not sure where to get the hostname information.  You decide to wait until you start writing your shell script to check the bash man page to see if there are any builtin commands or variables that could provide this information.
 
 You decide to develop your script on a Linux virtual machine running on your local operating system.  This way you can test the script's functionality before uploading it to the server where it will be used by the help desk staff.
-
-Create a Virtual Machine:
-First, start a command line session on your local machine.  Next, move into the working folder you created for this course.
-
-cd shellclass
-
-Initialize the vagrant project using the usual process of creating a directory, changing into that directory, and running "vagrant init".  We'll name this vagrant project "localusers".
-
-mkdir localusers
-
-cd localusers
-
-vagrant init jasonc/centos7
-
-Configure the Virtual Machine
-Edit the Vagrantfile and set the hostname of the virtual machine to "localusers".
-
-config.vm.hostname = "localusers"
-
-Start the Virtual Machine and Log into It
-
-Now you're ready to start the VM and connect to it.
-
-vagrant up
-
-vagrant ssh
-
-Navigate to the /vagrant Directory
-cd /vagrant
-
-### Write the Shell Script
-At this point, you can either create the script inside the virtual machine using the vim, nano, or emacs text editors or you can create the file using your favorite text editor on your local operating system.  (Atom from https://atom.io/ is a good choice.)
-
-When creating your script, refer back to the shell script requirements.  If you want or need more detailed steps to help you write your script, refer to the pseudocode at the end of this document.  It was intentionally placed at the end of the document because I want to encourage you to write the script on your own.  It's fine if you need the pseudocode.  As you get more scripting practice, you'll be able to script without any additional aids.
