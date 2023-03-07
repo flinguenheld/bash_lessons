@@ -11,7 +11,7 @@ fi
 if [[ "${#}" -lt 1 ]]
 then
     echo "Usage: add_new_local_user USERNAME [COMMENTS]..."
-    exit 
+    exit 1
 fi
 
 # Take the username then regroup all other parameters in comment
