@@ -11,18 +11,18 @@ You have your requirements from the "add-new-local-user.sh" script you created. 
 
 ### The script:
 
-- [] Is named "add-newer-local-user.sh".  (You change the name slightly to distinguish it from the previous script.  NOTE: In the real world you could have easily kept the same script name.  I just want to use a different name for the purpose of discussing specific scripts in the class.)
+- [ ] Is named "add-newer-local-user.sh".  (You change the name slightly to distinguish it from the previous script.  NOTE: In the real world you could have easily kept the same script name.  I just want to use a different name for the purpose of discussing specific scripts in the class.)
 
-- [] Enforces that it be executed with superuser (root) privileges.  If the script is not executed with superuser privileges it will not attempt to create a user and returns an exit status of 1.  All messages associated with this event will be displayed on standard error.
+- [ ] Enforces that it be executed with superuser (root) privileges.  If the script is not executed with superuser privileges it will not attempt to create a user and returns an exit status of 1.  All messages associated with this event will be displayed on standard error.
 
-- [] Provides a usage statement much like you would find in a man page if the user does not supply an account name on the command line and returns an exit status of 1.  All messages associated with this event will be displayed on standard error.
+- [ ] Provides a usage statement much like you would find in a man page if the user does not supply an account name on the command line and returns an exit status of 1.  All messages associated with this event will be displayed on standard error.
 
-- [] Uses the first argument provided on the command line as the username for the account.  Any remaining arguments on the command line will be treated as the comment for the account.
+- [ ] Uses the first argument provided on the command line as the username for the account.  Any remaining arguments on the command line will be treated as the comment for the account.
 
-- [] Automatically generates a password for the new account.
+- [ ] Automatically generates a password for the new account.
 
-- [] Informs the user if the account was not able to be created for some reason.  If the account is not created, the script is to return an exit status of 1.  All messages associated with this event will be displayed on standard error.
+- [ ] Informs the user if the account was not able to be created for some reason.  If the account is not created, the script is to return an exit status of 1.  All messages associated with this event will be displayed on standard error.
 
-- [] Displays the username, password, and host where the account was created.  This way the help desk staff can copy the output of the script in order to easily deliver the information to the new account holder.
+- [ ] Displays the username, password, and host where the account was created.  This way the help desk staff can copy the output of the script in order to easily deliver the information to the new account holder.
 
-- [] Suppress the output from all other commands.
+- [ ] Suppress the output from all other commands.
