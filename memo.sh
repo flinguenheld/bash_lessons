@@ -1,42 +1,61 @@
 #!/bin/bash
 
 # # --------------------------------------------------
-# FILE="/tmp/data"
-# ERR_FILE="/tmp/data.err"
+# !prout   # Last command which begins by prout
+# !!       # Last command
+# !$       # Last argument of the last command
 
-# # Redirect STDOUT to a file.
-# head -n1 /etc/passwd > ${FILE}
+# # -MATHS--------------------------------------------
+NUM=$(( 1 + 2 ))
+(( NUM++ ))
+NUM=$(( VAL1 + VAL2 )) # $ useless
 
-# # Redirect STDIN to a program.
-# read LINE < ${FILE}
-# echo "LINE contains: ${LINE}"
+NUM=$(echo '6 / 4.654' | bc -l)
+# bc -l to open a calculator
 
-# # Redirect STDERR to STDOUT
-# head -n3 /etc/passwd /fakefile 2>&1 # Without &, bash creates a file name '1'
+NUM=$(awk 'BEGIN {print 6/4}') # Cumbersome
 
-# # Redirect STDERR to a file
-# head -n3 /etc/passwd /fakefile 2> ${ERR_FILE}
+let NUM='2+3'
+let NUM++
 
-# # Redirect STDOUT and STDERR to a file.
-# head -n3 /etc/passwd /fakefile &> ${FILE}
+NUM=$(expr 2 + 3)
 
-# # Redirect STDOUT and STDERR through a pipe.
-# head -n3 /etc/passwd /fakefile |& cat -n
+# # -REDIRECTIONS-------------------------------------
+FILE="/tmp/data"
+ERR_FILE="/tmp/data.err"
 
-# # Send output to STDERR
-# echo "This is STDERR!" >&2
+# Redirect STDOUT to a file.
+head -n1 /etc/passwd > ${FILE}
 
-# # Discard STDOUT
-# head -n3 /etc/passwd /fakefile > /dev/null
+# Redirect STDIN to a program.
+read LINE < ${FILE}
+echo "LINE contains: ${LINE}"
 
-# # Discard STDERR
-# head -n3 /etc/passwd /fakefile 2> /dev/null
+# Redirect STDERR to STDOUT
+head -n3 /etc/passwd /fakefile 2>&1 # Without &, bash creates a file name '1'
 
-# # Discard STDOUT and STDERR
-# head -n3 /etc/passwd /fakefile &> /dev/null
+# Redirect STDERR to a file
+head -n3 /etc/passwd /fakefile 2> ${ERR_FILE}
 
+# Redirect STDOUT and STDERR to a file.
+head -n3 /etc/passwd /fakefile &> ${FILE}
 
-# # --------------------------------------------------
+# Redirect STDOUT and STDERR through a pipe.
+head -n3 /etc/passwd /fakefile |& cat -n
+
+# Send output to STDERR
+echo "This is STDERR!" >&2
+
+# Discard STDOUT
+head -n3 /etc/passwd /fakefile > /dev/null
+
+# Discard STDERR
+head -n3 /etc/passwd /fakefile 2> /dev/null
+
+# Discard STDOUT and STDERR
+head -n3 /etc/passwd /fakefile &> /dev/null
+
+# # -PARAMETERS---------------------------------------
 # Parameters: "${1}" "${2}" ...
 # Number of parameters: "${#}"
 # All parameters in one variable: "${@}"
@@ -51,15 +70,14 @@ while [[ "${#}" -ne 0 ]]; do
     shift
 done
 
-
 # # --------------------------------------------------
-# if [[ "${1}" = start ]]
-# then
-#     echo 'Starting.'
-# else
-#     echo 'Please enter start' >&2
-#     exit 1
-# fi
+if [[ "${1}" = start ]]
+then
+    echo 'Starting.'
+else
+    echo 'Please enter start' >&2
+    exit 1
+fi
 
 case "${1}" in
     start)
@@ -76,3 +94,25 @@ case "${1}" in
         exit 100
         ;;
 esac
+
+# # --------------------------------------------------
+special_char ()
+{
+    readonly SPECIAL="|&~!#@?$^-_*/"
+    [[ -v 1 ]] && NUM=${1} || NUM=1
+
+    for ((i = 0; i < ${NUM}; i++)); do
+        echo -n "$(echo ${SPECIAL} | fold -w1 | shuf | head -c1)"
+    done
+
+    return 0
+}
+
+PASSWORD="$(echo "$(date +%s)$(special_char 5)" | sha256sum | head -c10)$(special_char)"
+
+echo "${PASSWORD}"
+special_char 10
+
+# # --------------------------------------------------
+locate prout
+find / -name 'prout'
