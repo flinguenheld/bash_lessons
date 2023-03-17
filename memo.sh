@@ -5,6 +5,21 @@
 # !!       # Last command
 # !$       # Last argument of the last command
 
+# # --------------------------------------------------
+cut -d ':' -f 1 /etc/passwd
+awk '{print $NF}' /etc/passwd
+awk -F ':' '{print $1}' /etc/passwd
+awk -F ':' '{print $3}' /etc/passwd | sort -n
+awk -F ':' '{print $NF}' /etc/passwd | sort | uniq -c
+awk -F 'blah, aaa' '{print $(NF - 3)}'
+
+# # --------------------------------------------------
+grep -i 'Failed' "${1}" | awk '{print $(NF - 3)}' | sort | uniq -c | sort -nr | while read COUNT IP
+do
+    if [[ "${COUNT}" -gt 10 ]]
+    ...
+
+
 # # -MATHS--------------------------------------------
 NUM=$(( 1 + 2 ))
 (( NUM++ ))
