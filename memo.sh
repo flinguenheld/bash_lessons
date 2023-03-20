@@ -13,6 +13,13 @@ awk -F ':' '{print $3}' /etc/passwd | sort -n
 awk -F ':' '{print $NF}' /etc/passwd | sort | uniq -c
 awk -F 'blah, aaa' '{print $(NF - 3)}'
 
+
+sed '/^$/d' file.txt # Delete blank lines
+sed '/^#/d ; /^$/d' file.txt
+
+sed '/Group/ s/txt/txt2' file.txt # Replace txt only on lines which contain 'Group'
+sed '1,4 s/txt/txt2' file.txt # Replace txt only on lines 1 2 3 4
+
 # # --------------------------------------------------
 grep -i 'Failed' "${1}" | awk '{print $(NF - 3)}' | sort | uniq -c | sort -nr | while read COUNT IP
 do
