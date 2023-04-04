@@ -50,3 +50,11 @@ Add a user:
 
     useradd --create-home bob
     echo bob:test01234 | chpasswd
+
+Add sudo and add the user in sudoers.  
+
+
+Simplify the connection to this server:
+
+    ssh-keygen
+    ssh-copy-id bob@<ip>
