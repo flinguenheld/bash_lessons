@@ -96,4 +96,33 @@ else
 	echo "${STR/#0/}"
 fi
 
-# ------------------------------------------------------------------------------ Resistor Color ---
+# ------------------------------------------------------------------------------- D&D Character ---
+random_digit() {
+	printf "%s" "$(date +%S | sha256sum | sed 's/[^1-6]//g' | fold -w1 | shuf | head --lines 1)"
+}
+
+# Get four digits, remove the smaller and sum values
+random_value() {
+	for ((i = 0; i < 4; i++)); do
+		random_digit
+	done | fold -w1 | sort | tail --lines 3 | paste -sd '+' | bc
+}
+
+# --
+if [[ "$1" == modifier ]]; then
+	VAL=$(echo "($2 - 10) /2" | bc)
+	(("$2" % 2 && "$2" < 10)) && echo "$VAL - 1" | bc || echo "$VAL"
+
+elif [[ "$1" == generate ]]; then
+
+	echo "strength $(random_value)"
+	echo "dexterity $(random_value)"
+	echo "intelligence $(random_value)"
+	echo "wisdom $(random_value)"
+	echo "charisma $(random_value)"
+
+	CONSTITUTION=$(random_value)
+	HITPOINTS=$(echo "$(./$0 modifier $CONSTITUTION) +10" | bc)
+	echo "constitution $CONSTITUTION"
+	echo "hitpoints $HITPOINTS"
+fi
